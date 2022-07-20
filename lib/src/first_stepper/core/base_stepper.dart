@@ -37,6 +37,7 @@ class BaseStepper extends StatefulWidget {
     this.alignment,
     this.completedTasks,
     this.isCompleted,
+    this.animateActiveStepInTheMiddle,
   }) : super(key: key) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -130,6 +131,9 @@ class BaseStepper extends StatefulWidget {
   //if Complete function call
   final Function? isCompleted;
 
+  //animate the active step in the middle
+  final bool? animateActiveStepInTheMiddle;
+
   @override
   BaseStepperState createState() => BaseStepperState();
 }
@@ -169,7 +173,7 @@ class BaseStepperState extends State<BaseStepper> {
       // print("widget.stepRadius: ${widget.stepRadius}");
       print(i * ((widget.stepRadius * 2) + widget.lineLength));
       _scrollController!.animateTo(
-        (i * ((widget.stepRadius * 2) + widget.lineLength) ) - 98,
+        widget.animateActiveStepInTheMiddle! ? (i * ((widget.stepRadius * 2) + widget.lineLength) ) - 98 : (i * ((widget.stepRadius * 2) + widget.lineLength) ) ,
         duration: widget.stepReachedAnimationDuration,
         curve: widget.stepReachedAnimationEffect,
       );

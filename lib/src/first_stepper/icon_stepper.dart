@@ -82,8 +82,12 @@ class IconStepper extends StatelessWidget {
   //if Complete function call
   final Function? isCompleted;
 
+  //animate the active step in the middle
+  final bool? animateActiveStepInTheMiddle;
+
   /// Creates an IconStepper widget.
   IconStepper({
+    this.animateActiveStepInTheMiddle = false,
     this.isCompleted,
     this.completedTasks,
     this.completedStepColor,
@@ -110,6 +114,7 @@ class IconStepper extends StatelessWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment = Alignment.center,
+
   });
 
   @override
@@ -142,6 +147,7 @@ class IconStepper extends StatelessWidget {
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
       alignment: alignment,
+      animateActiveStepInTheMiddle: animateActiveStepInTheMiddle,
     );
   }
 

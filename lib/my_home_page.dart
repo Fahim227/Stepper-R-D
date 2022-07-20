@@ -18,10 +18,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Icon(Icons.supervised_user_circle),
     Icon(Icons.flag),
     Icon(Icons.access_alarm),
-    Icon(Icons.supervised_user_circle),
-    Icon(Icons.flag),
-    Icon(Icons.access_alarm),
-    Icon(Icons.supervised_user_circle),
+    Icon(Icons.add_alert),
+    Icon(Icons.gavel_outlined),
+    Icon(Icons.wallet),
+    Icon(Icons.movie),
   ];
 
   static Map<String,int> completedTasks = {};
@@ -35,14 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
     upperBound = allIcons.length-1;
     for (int i = 0 ;i<allIcons.length;i++){
       completedTasks[i.toString()] = 0;
-
     }
+    print(completedTasks);
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("Stepper Test"),),
@@ -61,7 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState((){
                   _activeStep = index;
                 });
-              }
+              },
+              animateActiveStepInTheMiddle: true,
             ),
             header(),
             Row(
@@ -80,11 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
   // if complete then call this method and make the corresponding stepper icon 1 in completeTask Map
   void ifComplete(int i){
     setState((){
+      //login for check is complete
+
       completedTasks[i.toString()] = 1;
     });
   }
 
-  /// Returns the next button.
+  // Returns the next button.
   Widget nextButton() {
     return ElevatedButton(
       onPressed: () {
