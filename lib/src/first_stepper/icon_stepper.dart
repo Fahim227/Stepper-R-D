@@ -85,8 +85,12 @@ class IconStepper extends StatelessWidget {
   //animate the active step in the middle
   final bool? animateActiveStepInTheMiddle;
 
+  //stop scrolling when tap
+  final bool? isTapScrollEnabled;
+
   /// Creates an IconStepper widget.
   IconStepper({
+    this.isTapScrollEnabled = true,
     this.animateActiveStepInTheMiddle = false,
     this.isCompleted,
     this.completedTasks,
@@ -121,6 +125,7 @@ class IconStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     // print("Printed From Icon_Stepper: $completedTasks");
     return BaseStepper(
+      isTapScrollEnabled: isTapScrollEnabled,
       isCompleted: isCompleted,
       completedTasks: completedTasks,
       children: _iconsWithSizeOverridden(),
@@ -148,6 +153,7 @@ class IconStepper extends StatelessWidget {
       activeStep: activeStep,
       alignment: alignment,
       animateActiveStepInTheMiddle: animateActiveStepInTheMiddle,
+
     );
   }
 

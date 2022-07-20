@@ -47,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Column(
           children: [
             IconStepper(
+              isTapScrollEnabled: false,
               isCompleted: ifComplete,
               completedTasks: completedTasks,
               completedStepColor: finished,
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // Returns the next button.
+  /// Returns the next button.
   Widget nextButton() {
     return ElevatedButton(
       onPressed: () {

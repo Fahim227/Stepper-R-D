@@ -38,6 +38,7 @@ class BaseStepper extends StatefulWidget {
     this.completedTasks,
     this.isCompleted,
     this.animateActiveStepInTheMiddle,
+    this.isTapScrollEnabled,
   }) : super(key: key) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -134,6 +135,9 @@ class BaseStepper extends StatefulWidget {
   //animate the active step in the middle
   final bool? animateActiveStepInTheMiddle;
 
+  //stop scrolling when tap
+  final bool? isTapScrollEnabled;
+
   @override
   BaseStepperState createState() => BaseStepperState();
 }
@@ -169,11 +173,9 @@ class BaseStepperState extends State<BaseStepper> {
   void _afterLayout(_) {
     // ! Provide detailed explanation.
     for (int i = 0; i < widget.children!.length; i++) {
-      // print("LignLength: ${widget.lineLength}");
-      // print("widget.stepRadius: ${widget.stepRadius}");
-      print(i * ((widget.stepRadius * 2) + widget.lineLength));
+      print(widget.isTapScrollEnabled);
       _scrollController!.animateTo(
-        widget.animateActiveStepInTheMiddle! ? (i * ((widget.stepRadius * 2) + widget.lineLength) ) - 98 : (i * ((widget.stepRadius * 2) + widget.lineLength) ) ,
+        widget.isTapScrollEnabled! ? widget.animateActiveStepInTheMiddle! ? (i * ((widget.stepRadius * 2) + widget.lineLength) ) - 98 : (i * ((widget.stepRadius * 2) + widget.lineLength) ) : _scrollController!.position.pixels,
         duration: widget.stepReachedAnimationDuration,
         curve: widget.stepReachedAnimationEffect,
       );
@@ -186,6 +188,11 @@ class BaseStepperState extends State<BaseStepper> {
   Widget build(BuildContext context) {
     // Controls scrolling behavior.
     if (!widget.scrollingDisabled) {
+      /*
+      * if onTapScroll == True{
+      *
+      * }
+      * */
       WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
     }
 
@@ -348,6 +355,7 @@ class BaseStepperState extends State<BaseStepper> {
         }
       });
     }
+
   }
 
   /// Controls the logic for going to the previous step.
